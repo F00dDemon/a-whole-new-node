@@ -16,19 +16,16 @@ public class Traversals {
 
     Node<Integer> child1_1 = new Node<>(5);
     Node<Integer> child1_2 = new Node<>(99);
-    child1.children = new ArrayList<>();
     child1.children.add(child1_1);
     child1.children.add(child1_2);
 
 
     Node<Integer> child2_1 = new Node<>(73);
-    child2.children = new ArrayList<>();
     child2.children.add(child2_1);
 
     Node<Integer> child3_1 = new Node<>(24);
     Node<Integer> child3_2 = new Node<>(61);
     Node<Integer> child3_3 = new Node<>(12);
-    child3.children = new ArrayList<>();
     child3.children.add(child3_1);
     child3.children.add(child3_2);
     child3.children.add(child3_3);
@@ -36,8 +33,31 @@ public class Traversals {
 
     Node<Integer> child3_1_1 = new Node<>(83);
     Node<Integer> child3_1_2 = new Node<>(6);
-    child3_1.children = new ArrayList<>();
     child3_1.children.add(child3_1_1);
     child3_1.children.add(child3_1_2);
+
+    preOrder(root);
+    System.out.println(max(root));
   }
+  static void preOrder(Node<?> node){
+    if(node == null) return; 
+    System.out.print(node.value + " ");
+    for(Node<?> child: node.children){
+      preOrder(child);
+    }
+  }
+  static int max(Node<Integer> node){
+    if(node == null) return Integer.MIN_VALUE;
+
+    int max = node.value;
+    for(Node<Integer> subtree: node.children){
+      int subtreeMax = max(subtree);
+      if (subtreeMax > max){
+        max = subtreeMax;
+      }
+    }
+    return max;
+  }
+  
 }
+
